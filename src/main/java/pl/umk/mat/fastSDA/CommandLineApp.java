@@ -1,4 +1,4 @@
-package pl.umk.mat;
+package pl.umk.mat.fastSDA;
 
 /**
  * Hello world!
