@@ -4,30 +4,142 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>org.scijava</groupId>
+    <artifactId>pom-scijava</artifactId>
+    <version>26.0.0</version>
+    <relativePath />
+  </parent>
+
   <groupId>pl.umk.mat</groupId>
   <artifactId>fastSDA</artifactId>
-  <version>0.0.1</version>
-
-  <name>fastSDA</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <version>0.1</version>
 
   <properties>
+    <package-name>pl.umk.mat.fastSDA</package-name>
+    <main-class>pl.umk.mat.fastSDA.CommandLineApp</main-class>
+    <license.licenseName>MIT</license.licenseName>
+    <license.copyrightOwners>My Company, Inc.</license.copyrightOwners>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <java.version>8</java.version>
+    <junit.jupiter.version>5.3.2</junit.jupiter.version>
+    <junit.platform.version>1.2.0</junit.platform.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
   </properties>
+  <name>Fast SDA</name>
+  <description>Fast Implementation of SDA Algorithm</description>
+  <url>http://mat.umk.pl/~pikonrad</url>
+  <inceptionYear>2019</inceptionYear>
+  <organization>
+    <name>Nicolaus Copernicus University, Faculty of Mathematics and Computer Science</name>
+    <url>mat.umk.pl</url>
+  </organization>
 
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>pikonrad</id>
+      <name>Piotr Wisniewski</name>
+      <url>http://mat.umk.pl/pikonrad</url>
+      <roles>
+        <role>lead</role>
+        <role>developer</role>
+        <role>debugger</role>
+        <role>reviewer</role>
+        <role>support</role>
+        <role>maintainer</role>
+      </roles>
+    </developer>
+  </developers>
+
+
+  <mailingLists>
+    <mailingList>
+      <name>Image.sc Forum</name>
+      <archive>https://forum.image.sc/tags/imagej</archive>
+    </mailingList>
+  </mailingLists>
+  <scm>
+    <connection>scm:git:git://https://github.com/pikonradNCU/FastSDA</connection>
+    <developerConnection>scm:git:git@github.com:imagej/example-legacy-plugin</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://https://github.com/pikonradNCU/FastSDA</url>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/pikonradNCU/FastSDA/issues</url>
+  </issueManagement>
+  <ciManagement>
+    <system>None</system>
+  </ciManagement>
+
+  <contributors>
+    <contributor>
+      <name>Piotr Wisniewski</name>
+    </contributor>
+  </contributors>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <groupId>net.imagej</groupId>
+      <artifactId>ij</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>4.0</version>
+    </dependency>
+
+    <!-- Test scope dependencies BEGIN-->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.jupiter.version}</version>
       <scope>test</scope>
     </dependency>
-  </dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>${junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.11.1</version>
+      <scope>test</scope>
+    </dependency><!-- https://mvnrepository.com/artifact/javax.media/jai_core -->
+    <dependency>
+      <groupId>com.github.jai-imageio</groupId>
+      <artifactId>jai-imageio-core</artifactId>
+      <version>1.3.1</version>
+    </dependency>
 
+  </dependencies>
   <build>
+    <finalName>fastSDA</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
