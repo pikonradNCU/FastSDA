@@ -9,8 +9,10 @@ import java.util.stream.IntStream;
 import static pl.umk.mat.fastSDA.image.BitScale.GRAY_8;
 
 public class ClassicSDA {
-    public static void classicSDA(int[][] m, int[][] result, int X, int Y, int R,
+    public static void classicSDA(int[][] inputData, int[][] result, int X, int Y, int R,
                                   BitScale scale) {
+
+        int[][] m = makeColorsPositive(inputData, X, Y, scale);
 
         for (int x0 = 0; x0 < X; x0++) {
             classicSDAforX(m, result, X, Y, R, scale, x0);
@@ -19,18 +21,23 @@ public class ClassicSDA {
 
     public static void classicSdaMultiThread(int[][] inputData, int[][] result, int X, int Y, int R,
                                              BitScale scale) {
-        int m[][];
-        if (scale==GRAY_8){
-            m=new int[X][Y];
-            IntStream.range(0, X).parallel().forEach(x -> {
-                for (int y=0;y<Y;y++){
-                    m[x][y]=(inputData[x][y] <0) ? inputData[x][y]+256 : inputData[x][y];
-                }
-            });
-        } else m=inputData;
+        int[][] m = makeColorsPositive(inputData, X, Y, scale);
         IntStream.range(0, X).parallel().forEach(x0 -> {
             classicSDAforX(m, result, X, Y, R, scale,x0);
         });
+    }
+
+    private static int[][] makeColorsPositive(int[][] inputData, int X, int Y, BitScale scale) {
+        int m[][];
+        if (scale ==GRAY_8){
+            m=new int[X][Y];
+            IntStream.range(0, X).parallel().forEach(x -> {
+                for (int y = 0; y< Y; y++){
+                    m[x][y]=(inputData[x][y] <0) ? inputData[x][y]+256 : inputData[x][y];
+                }
+            });
+        } else m= inputData;
+        return m;
     }
 
     private static void classicSDAforX(int[][] m, int[][] result, int X, int Y, int R,
